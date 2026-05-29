@@ -1,0 +1,62 @@
+import Link from 'next/link';
+import Cart from './Cart.component';
+import AlgoliaSearchBox from '../AlgoliaSearch/AlgoliaSearchBox.component';
+import MobileSearch from '../AlgoliaSearch/MobileSearch.component';
+
+/**
+ * Navigation for the application.
+ * Includes mobile menu.
+ */
+const Navbar = () => {
+  return (
+    <header className="border-b border-border">
+      <nav id="header" className="top-0 z-50 w-full bg-surface">
+        <div className="container mx-auto px-4 sm:px-6 py-4">
+          <div className="flex flex-col space-y-4 md:hidden">
+            <div className="text-center">
+              <Link href="/">
+                <span className="text-lg font-bold tracking-widest text-text">
+                  SHOP
+                </span>
+              </Link>
+            </div>
+            <div className="w-full">
+              <MobileSearch />
+            </div>
+          </div>
+          <div className="hidden md:flex items-center justify-between">
+            <div className="flex items-center space-x-8">
+              <Link href="/products">
+                <span className="text-base uppercase tracking-wider group relative">
+                  <span className="relative inline-block">
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-500"></span>
+                    Products
+                  </span>
+                </span>
+              </Link>
+              <Link href="/categories">
+                <span className="text-base uppercase tracking-wider group relative">
+                  <span className="relative inline-block">
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-500"></span>
+                    Categories
+                  </span>
+                </span>
+              </Link>
+            </div>
+            <Link href="/" className="hidden lg:block">
+              <span className="text-xl font-bold tracking-widest text-text hover:text-primary transition-colors duration-200">
+                SHOP
+              </span>
+            </Link>
+            <div className="flex items-center space-x-3">
+              <AlgoliaSearchBox />
+              <Cart />
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
+};
+
+export default Navbar;
