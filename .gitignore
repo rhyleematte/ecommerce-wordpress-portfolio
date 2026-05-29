@@ -39,3 +39,6 @@ next-env.d.ts
 /playwright-report/
 /playwright/.cache/
 src/pages/registrer.tsx
+
+# project docs
+README.md
