@@ -29,6 +29,11 @@ const nextConfig = {
         hostname: '*.s6-tastewp.com',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'stingycow.s6-tastewp.com',
+        pathname: '**',
+      },
     ],
   },
 };

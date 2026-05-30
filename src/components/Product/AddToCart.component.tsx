@@ -1,5 +1,5 @@
 // Imports
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -45,7 +45,7 @@ const AddToCart = ({
   const [requestError, setRequestError] = useState<boolean>(false);
 
   const productQueryInput = {
-    clientMutationId: uuidv4(), // Generate a unique id.
+    clientMutationId: uuidv4(),
     productId: product?.databaseId,
     ...(variationId ? { variationId } : {}),
   };
@@ -53,13 +53,17 @@ const AddToCart = ({
   // Get cart data query
   const { data, refetch } = useQuery(GET_CART, {
     notifyOnNetworkStatusChange: true,
-    onCompleted: () => {
+  });
+
+  // Sync cart whenever data changes
+  useEffect(() => {
+    if (data) {
       const updatedCart = getFormattedCart(data);
       if (updatedCart) {
         syncWithWooCommerce(updatedCart);
       }
-    },
-  });
+    }
+  }, [data, syncWithWooCommerce]);
 
   // Add to cart mutation
   const [addToCart, { loading: addToCartLoading }] = useMutation(ADD_TO_CART, {
@@ -73,7 +77,6 @@ const AddToCart = ({
         refetch();
       }, 2000);
     },
-
     onError: () => {
       setRequestError(true);
     },
