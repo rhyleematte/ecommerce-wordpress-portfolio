@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
+    qualities: [75, 90],
     remotePatterns: [
       {
         protocol: 'https',
@@ -16,6 +17,16 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'via.placeholder.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.tastewp.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.s6-tastewp.com',
         pathname: '**',
       },
     ],
